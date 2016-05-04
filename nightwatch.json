@@ -1,5 +1,5 @@
 {
-  "src_folders" : ["nglview/nglview/tests/js"],
+  "src_folders" : ["nglview/tests/js"],
   "output_folder" : "reports",
   "custom_commands_path" : "jscommands/",
   "custom_assertions_path" : "",
