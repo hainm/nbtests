@@ -5,7 +5,10 @@ exports.command = function(cellNumber, callback) {
      function(cellNumber) {
          console.log("Executing cell number " + cellNumber);
          var cell = IPython.notebook.get_cell(cellNumber);
-         cell.execute();
+
+         if (cell) {
+             cell.execute();
+         }
     },
 
     [cellNumber], // arguments array to be passed
