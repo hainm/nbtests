@@ -3,10 +3,10 @@ exports.command = function(cellNumber, callback) {
 
   this.execute(
      function(cellNumber) {
-         console.log("Executing cell number " + cellNumber);
          var cell = IPython.notebook.get_cell(cellNumber);
 
          if (cell) {
+             console.log( cell );
              cell.execute();
          }
     },
