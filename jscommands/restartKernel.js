@@ -3,7 +3,7 @@ exports.command = function(timeout, callback) {
 
   this.execute(
      function() {
-        IPython.notebook.kernel.restart();
+        Jupyter.notebook.kernel.restart();
     },
 
     null, // arguments array to be passed
