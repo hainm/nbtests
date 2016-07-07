@@ -21,7 +21,7 @@ exports.command = function(cellNumber, callback) {
               console.log("something wrong with # " + cellNumber);
               console.log(result);
           }
-        self.assert.ok(result.value.output_type != 'error', "Check that python has no error");
+        self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
       }
       
       
