@@ -3,7 +3,7 @@ exports.command = function(cellNumber, callback) {
 
   this.execute(
      function(cellNumber) {
-         var cell = IPython.notebook.get_cell(cellNumber);
+         var cell = Jupyter.notebook.get_cell(cellNumber);
          
          if (cell.output_area.outputs.length > 0) {
              var out = cell.output_area.outputs[0];
@@ -18,8 +18,10 @@ exports.command = function(cellNumber, callback) {
     function(result) {
       if (result.value != null) {
           if (result.value.output_type == 'error') {
+              var cell = Jupyter.notebook.get_cell(cellNumber);
               console.log("something wrong with # " + cellNumber);
               console.log(result);
+              console.log(cell);
           }
         self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
       }
