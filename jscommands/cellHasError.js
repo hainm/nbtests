@@ -19,9 +19,6 @@ exports.command = function(cellNumber, callback) {
       if (result.value != null) {
           if (result.value.output_type == 'error') {
               var cell = Jupyter.notebook.get_cell(cellNumber);
-              console.log("something wrong with # " + cellNumber);
-              console.log(result);
-              console.log(cell);
           }
         self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
       }
