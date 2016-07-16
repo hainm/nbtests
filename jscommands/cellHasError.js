@@ -7,9 +7,9 @@ exports.command = function(cellNumber, callback) {
          
          if (cell.output_area.outputs.length > 0) {
              var out = cell.output_area.outputs[0];
-             if (out.output_type == 'error') {
-                 return { output_type: 'error', evalue: out.evalue, ename: out.ename };
-             }
+             return {output_type: out.output_type};
+         }else{
+             return {output_type: 'blank'};
          }
     },
 
@@ -17,8 +17,10 @@ exports.command = function(cellNumber, callback) {
 
     function(result) {
       if (result.value != null) {
-        //self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
-        console.log('result', result.value.evalue, result.value.ename, result.value);
+        if (result.value.output_type){
+            console.log('output_type', result.value.output_type);
+            self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
+        }
       }
       
       
