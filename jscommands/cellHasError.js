@@ -3,12 +3,14 @@ exports.command = function(cellNumber, callback) {
 
   this.execute(
      function(cellNumber) {
-         var cell = Jupyter.notebook.get_cell(cellNumber);
+         var cell = Jupyter.notebook.get_cell(cellNumber) || undefined;
          
-         if (cell.output_area.outputs.length > 0) {
-             var out = cell.output_area.outputs[0];
-             if (out.output_type == 'error') {
-                 return { output_type: 'error', evalue: out.evalue, ename: out.ename };
+         if (cell){
+             if (cell.output_area.outputs.length > 0) {
+                 var out = cell.output_area.outputs[0];
+                 if (out.output_type == 'error') {
+                     return { output_type: 'error', evalue: out.evalue, ename: out.ename };
+                 }
              }
          }
     },
@@ -18,12 +20,14 @@ exports.command = function(cellNumber, callback) {
     function(result) {
       if (result.value != null) {
           if (result.value.output_type == 'error') {
-              var cell = Jupyter.notebook.get_cell(cellNumber);
-              console.log("something wrong with # " + cellNumber);
-              console.log(result);
-              console.log(cell);
+              var cell = Jupyter.notebook.get_cell(cellNumber) || undefined;
+              if (cell){
+                  console.log("something wrong with # " + cellNumber);
+                  console.log(result);
+                  console.log(cell);
+              }
           }
-        self.assert.ok(result.value.output_type != 'error', "Check that python has no error");
+        self.verify.ok(result.value.output_type != 'error', "Check that python has no error");
       }
       
       
