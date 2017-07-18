@@ -3,6 +3,7 @@ exports.command = function(cellNumber, callback) {
 
   this.execute(
      function(cellNumber) {
+         console.log("execute cell");
          var cell = Jupyter.notebook.get_cell(cellNumber);
 
          if (cell) {
